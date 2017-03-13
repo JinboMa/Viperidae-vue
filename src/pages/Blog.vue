@@ -1,7 +1,7 @@
 <template lang="jade">
 .blog(:style="{height:blogH}",@click="hide = true",v-loading="loading",element-loading-text="正在提交,请稍等")
-	textarea.content(v-model="formData.content",spellcheck="false")
-	.html(v-html="markedHtml")
+	textarea.content(v-model="formData.content",spellcheck="false",v-show="showLeft",:style="{width:leftWidth}")
+	.html(v-html="markedHtml",v-show="showRight",:style="{width:rightWidth}")
 	.markTit(:class="{hide:hide}") Markdown
 	.htmlTit(:class="{hide:hide}") HTML
 	el-card.card(:body-style="cardStyle",:class="{toLeft: !toLeft}")
@@ -12,7 +12,9 @@
 		//- 		el-option(v-for="item in tags",:value="item")
 		el-button.button.right(type="primary",@click="postMessage") 提交此篇文章
 		el-button.button.left(type="text",@click="toLeft = false") 收起标题
-	el-switch.switch(v-model="toLeft",on-color="#324057",on-text="标题",off-text="标题")
+	el-switch.titleSwitch(v-model="toLeft",on-color="#324057",on-text="标题",off-text="标题")
+	el-switch.markdownSwitch(v-model="showLeft",on-color="#324057",on-text="左侧",off-text="左侧")
+	el-switch.htmlSwitch(v-model="showRight",on-color="#324057",on-text="右侧",off-text="右侧")
 </div>
 </template>
 
@@ -26,6 +28,8 @@ export default {
 			blogId : null,
 			hide : false,
 			toLeft : true,
+			showLeft : true,
+			showRight : true,
 			//默认标签分类
 			tags : ["python","javascript","html","css","markdown","sublime"],
 			//表单提交时loading
@@ -45,6 +49,10 @@ export default {
 			}
 		}
 	},
+	beforeCreated(){
+		this.showLeft = true
+		this.showRight = true
+	},
 	created: function () {
 		this.blogId = this.$route.query.blogId
 		marked.setOptions({
@@ -59,8 +67,20 @@ export default {
 		this.getMessage()
 	},
 	computed : {
-		markedHtml : function(){
+		markedHtml(){
 			return marked(this.formData.content)
+		},
+		leftWidth: function(){
+			var left = '50%'
+			this.showLeft && !this.showRight && (left = '100%')
+			this.showLeft && this.showRight && (left = '50%')
+			return left
+		},
+		rightWidth: function(){
+			var right = '50%'
+			!this.showLeft && this.showRight && (right = '100%')
+			this.showLeft && this.showRight && (right = '50%')
+			return right
 		}
 	},
 	methods : {
@@ -125,14 +145,17 @@ textarea.content
 .html
 	width 50%
 	height 100%
-	overflow scroll
-	float left
+	overflow auto
 	background #f6f6f6
 	padding 20px
 	font-family "Inconsolata", "Monaco", "Andale Mono", "Lucida Console", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace
 	font-size 14px
 	line-height 1.55em
-	white-space pre
+	white-space pre-wrap
+textarea.content
+	float left
+.html
+	float right
 textarea
 	border none
 	border-right 1px solid #ccc
@@ -168,10 +191,18 @@ textarea.description
 	display block
 	margin 0 auto
 	overflow hidden
-.switch
+.titleSwitch
+.markdownSwitch
+.htmlSwitch
 	position absolute
-	top 2%
 	right 2%
+
+.titleSwitch
+	top 20px
+.markdownSwitch
+	top 50px
+.htmlSwitch
+	top 80px
 .toLeft
 	left -50%
 </style>

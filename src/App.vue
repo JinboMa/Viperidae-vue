@@ -61,8 +61,8 @@ a
 	min-height 500px
 	margin 0 auto
 ::-webkit-scrollbar
-	width 2px
-	height 2px
+	width 5px
+	height 5px
 	background none
 ::-webkit-scrollbar-track
 	border-radius 1px

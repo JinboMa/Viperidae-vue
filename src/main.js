@@ -67,6 +67,14 @@ new Vue({
 			(res)=>{
 				var message = res.body.message
 
+				if(res.body.code == 202){
+					localStorage.removeItem('token')
+					localStorage.removeItem('username')
+					this.$message.error(message)
+					this.$router.push({ path : '/Login' })
+					return ;
+				}
+
 				if(res.body.result){
 					!message && (message = data.successMsg)
 					data.successAlert && this.$message.success(message)
