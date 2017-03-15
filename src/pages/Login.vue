@@ -68,15 +68,15 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-$width = 350px
+@import '../assets/styl/const.styl'
 .login
-	width $width
+	width $Width
 	position absolute
 	top 50%
 	left 50%
 	transform translate(-50%,-50%)
 .box-card
-	width $width
+	width $Width
 	height (@width+100)
 	padding (@width/17.5) (@width/14)
 .logo

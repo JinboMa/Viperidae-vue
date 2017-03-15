@@ -54,14 +54,14 @@ export default {
 </script>
 
 <style scoped lang="stylus">
+@import '../assets/styl/const.styl'
 .blogContent
 	display block
 	width 100%
-	border-bottom 1px solid #f0f0f0
 	padding 20px
 	cursor pointer
 	&:hover
-		box-shadow 0 0 5px #20A0FF
+		box-shadow 0 0 5px $LightBlue
 .authorMsg
 	margin-bottom 10px
 .authorMsg img
@@ -69,14 +69,15 @@ export default {
 	width 32px
 	height @width
 	border-radius 50%
-	border 1px solid #ddd
+	border 1px solid $Sliver
 .author
-	color #333
+	color $ExtraLightBlack
+	font-weight bolder
 	font-size 13px
 	padding-left 3px
 .createTime
 	font-size 13px
-	color #969696
+	color $Sliver
 	padding-left 3px
 h3
 	width 70%
@@ -84,7 +85,7 @@ h3
 	text-overflow ellipsis
 	white-space nowrap
 	font-size 18px
-	color #969696
+	color $Sliver
 	font-weight 700
 	margin-bottom 5px
 	height 24px

@@ -98,6 +98,7 @@ export default {
 </script>
 
 <style scoped lang="stylus">
+@import '../assets/styl/const.styl'
 .work
 	width 100%
 	position relative
@@ -118,6 +119,6 @@ export default {
 	content '工作标题'
 	display block
 	font-weight bolder
-	color #324057
+	color $LightBlack
 	padding 5px
 </style>

@@ -71,33 +71,33 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-$width = 350px
+@import '../assets/styl/const.styl'
 .registration
 	font-weight bold
-	width $width
+	width $Width
 	position absolute
 	top 50%
 	left 50%
 	transform translate(-50%,-50%)
 .box-card
-	width $width
+	width $Width
 	height (@width+100)
 	padding (@width/17.5) (@width/14)
 .logo
 	height 26px
 	font-weight bold
-	font-size 30px
+	font-size ($Unit * 3)
 	font-family "Microsoft YaHei",sans-serif
 	text-align center
 	transform translateY(-20px)
-	color #324057
+	color $LightBlack
 .regBtn
 	width 150px
 	font-size 18px
 	font-family "Microsoft YaHei",sans-serif
 	font-weight bold
 	display block
-	margin 20px auto 0
+	margin ($Unit*2) auto 0
 .login
 	font 12px normal
 	color #3182bd

@@ -96,6 +96,7 @@ export default {
 </script>
 
 <style scoped lang="stylus">
+@import '../assets/styl/const.styl'
 .myHeader
 	width 100%
 	height 60px
@@ -104,7 +105,7 @@ export default {
 	min-width 650px
 .el-icon-menu
 	font-size 26px
-	color #E5E9F2
+	color $LightGray
 	text-align center
 	transform translateY(5px)
 </style>

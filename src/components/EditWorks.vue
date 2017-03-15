@@ -40,13 +40,14 @@ export default{
 }
 </script>
 <style scoped lang="stylus">
+@import '../assets/styl/const.styl'
 .editWorks
 	max-height 400px
 	overflow auto
 .item
 	cursor pointer
 	padding 5px
-	border-bottom 1px solid #ccc
+	border-bottom 1px solid $Gray
 	width 400px
 	overflow hidden
 	text-overflow ellipsis
@@ -57,16 +58,16 @@ export default{
 .time
 	margin-right 5px
 .author
-	color #1F2D3D
+	color $ExtraLightBlack
 	font-weight bolder
 .time
-	color #F7BA2A
+	color $Warning
 	font-weight bolder
 .title
-	color #20A0FF
+	color $Blue
 	font-weight bolder
 .select
-	color red
+	color $Danger
 	float right
 .selectAll
 	float right

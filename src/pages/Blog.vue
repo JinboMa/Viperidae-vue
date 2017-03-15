@@ -123,10 +123,11 @@ export default {
 </script>
 
 <style scoped lang="stylus">
+@import '../assets/styl/const.styl'
 .blog
 	width 100%
 	height 90%
-	background gray
+	background $Gray
 	position relative
 .markTit
 .htmlTit
@@ -146,7 +147,7 @@ textarea.content
 	width 50%
 	height 100%
 	overflow auto
-	background #f6f6f6
+	background $DarkWhite
 	padding 20px
 	font-family "Inconsolata", "Monaco", "Andale Mono", "Lucida Console", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace
 	font-size 14px
@@ -158,7 +159,7 @@ textarea.content
 	float right
 textarea
 	border none
-	border-right 1px solid #ccc
+	border-right 1px solid $Sliver
 	resize none
 .card
 	position absolute
@@ -171,10 +172,10 @@ textarea
 	margin 10px
 .title
 	border none
-	border-bottom 1px solid #324057
+	border-bottom 1px solid $Gray
 	width 100%
 	font-size 20px
-	color #324057
+	color $LightBlack
 	padding 0
 	margin-bottom 10px
 	padding-bottom 5px
@@ -182,7 +183,7 @@ textarea.description
 	width 100%
 	height 60px
 	padding 10px
-	border 1px solid #ccc
+	border 1px solid $Sliver
 .tags
 	width 100%
 	margin 10px 0

@@ -6,8 +6,9 @@
 </script>
 
 <style scoped lang="stylus">
+@import '../assets/styl/const.styl'
 .index
-	width 1050px
+	width $AllWidth
 	position absolute
 	top 50%
 	left 50%
