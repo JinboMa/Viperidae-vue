@@ -10,6 +10,7 @@ import Blog from '../pages/Blog'
 import Work from '../pages/Work'
 import BlogList from '../pages/BlogList'
 import WorkList from '../pages/WorkList'
+import Chat from '../pages/Chat'
 export default new Router({
 		mode: "history",
 		routes: [{
@@ -45,5 +46,10 @@ export default new Router({
 			path: "/WorkList",
 			component: WorkList,
 			name: "WorkList"
+		},
+		{
+			path: "/Chat",
+			component: Chat,
+			name: "Chat"
 		}]
 	})

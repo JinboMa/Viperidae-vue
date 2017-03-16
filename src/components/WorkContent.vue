@@ -7,7 +7,7 @@
 	span.startTime(v-if="isClick") {{formData.start_time}}
 	span.timeDescription(v-if="isClick") 结束时间
 	span.endTime(v-if="isClick") {{formData.end_time}}
-	p.description(v-if="isClick") {{formData.description}}
+	pre.description(v-if="isClick") {{formData.description}}
 </template>
 <script>
 export default {
@@ -112,13 +112,10 @@ h3
 	font-weight 700
 	margin-bottom 10px
 	height 24px
-p.description
+.description
 	width 100%
 	color $ExtraLightBlack
 	padding-top 10px
-	display -webkit-box
-	-webkit-box-orient vertical
-	-webkit-line-clamp 1
-	overflow hidden
+	white-space pre-wrap
 	font-size 14px
 </style>

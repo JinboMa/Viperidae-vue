@@ -162,5 +162,15 @@ export default function(){
 			failAlert : true,
 			token : true,
 		},
+	/* ---------------------------关于聊天--------------------------- */
+		chat : {
+			method : "WS",
+			url : "chat",
+			successMsg : "关闭成功",
+			failMsg : "关闭失败",
+			successAlert : false,
+			failAlert : false,
+			token : true,
+		},
 	}
 }

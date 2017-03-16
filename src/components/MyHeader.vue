@@ -11,7 +11,7 @@
 				template(slot="title") 博客
 				el-menu-item(index="/BlogList") 我的博客
 				el-menu-item(index="/Blog") 新建博客
-			el-menu-item(index="4") 聊天
+			el-menu-item(index="/Chat") 聊天
 			el-menu-item(index="5") 设置
 			el-menu-item(index="0",style="float:right") {{time}}
 			el-submenu(index="6",style="float:right",@click="console.log(123)")
