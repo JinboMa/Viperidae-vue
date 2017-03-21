@@ -1,45 +1,67 @@
 <template lang="jade">
 .chat.content
 	.contacts.left
-		.contactList(v-for="(user,id) in friends",@click="changeChat(user.username,id)") {{user.username}}
-	.dialogBox.right
-		.dialogName {{dialogName}}
+		.contactList(v-for="(user,id) in friends",@click="selectFriendId = id",:class="{active:selectFriendId == id}")
+			el-badge.userImg(:value="1000",:max="99")
+				.div
+			span {{user.username}}
+	.dialogBox.right(v-for="(friend,id) in friends",v-if="selectFriendId == id")
+		.dialogName {{friend.username}}
 		.dialogContent
-			.row(v-for="msg in messeges")
+			.row(v-for="msg in friend.messages")
 				div(:class="{sendChat:msg.isSend,reseiveChat:!msg.isSend}",v-text="msg.message")
-		textarea.dialogEdit(spellcheck="false",v-model="readyMessage.data.message")
-		el-button.send(type='default',size="small",@click="sendMessage") 发送
+		textarea.dialogEdit(spellcheck="false",v-model="friend.readyMessage.data.message",@keyup.ctrl.enter="sendMessage(id)")
+		el-button.send(type='default',size="small",@click="sendMessage(id)") 发送
 </template>
 <script>
 export default{
 	data(){
 		return{
 			WS : {},
-			friends : [],
-			messeges : [],
-			readyMessage : {
-				method : 'send',
-				data : {
-					id : null,
-					message : ''
-				}
-			},
-			dialogName : ''
+			friends : {},
+			selectFriendId : null,
+			// readyMessage : {
+			// 	method : 'send',
+			// 	data : {
+			// 		id : null,
+			// 		message : ''
+			// 	}
+			// },
 		}
 	},
 	created(){
+		this.getFriends()
 		this.initWS()
 	},
 	methods:{
-		sendMessage(){
+		getFriends(){
+			this.ajax(this.setAjax("friends",{},this.getSuccess,this.getFail))
+		},
+		getSuccess(res){
+			for(var i in res){
+				res[i].readyMessage = {
+					method : 'send',
+					data : {
+						id : i,
+						message : ''
+					}
+				}
+				res[i].messages = []
+			}
+			this.friends = res
+		},
+		getFail(res){
+			console.log('fail',res)
+		},
+		sendMessage(id){
 			//发送消息
 			var todo = ()=>{
-				this.messeges.push({
+				this.friends[id].messages.push({
 					isSend : true,
-					message : this.readyMessage.data.message
+					message : this.friends[id].readyMessage.data.message
 				})
-				this.WS.send(JSON.stringify(this.readyMessage))
-				this.readyMessage.data.message = ''
+				this.WS.send(JSON.stringify(this.friends[id].readyMessage))
+				this.friends[id].readyMessage.data.message = ''
 			}
 			//判断长连接正常
 			if(this.WS.readyState != 1){
@@ -48,10 +70,6 @@ export default{
 			}else{
 				todo()
 			}
-		},
-		changeChat(user,id){
-			this.readyMessage.data.id = id
-			this.dialogName = user
 		},
 		initWS(event){
 			var token = localStorage.getItem('token')
@@ -80,9 +98,9 @@ export default{
 					message = receivedMsg.message,
 					data = receivedMsg.data,
 					code = receivedMsg.code
-				code == 100 && (this.friends = data)
+				code == 300 && (this.$message.warning('对方不在线'))
 				if(code == 200){
-					this.messeges.push({
+					this.friends[this.selectFriendId].messages.push({
 						isSend : false,
 						message : data.content
 					})
@@ -112,19 +130,33 @@ export default{
 .dialogBox
 	height 100%
 .contacts
+	position relative
+	z-index 10
 	width 20%
 	background-color $LightGray
 .contactList
+	position relative
 	width 100%
-	padding 20px
 	font-size 16px
-	color $black
-	text-align center
+	height 55px
+	padding 5px
+	color $Black
 	cursor pointer
 	&:hover
 		background $Gray
 	&.active
 		background $Gray
+	span
+		display inline-block
+		margin 12px 0 0 60px
+.userImg
+	position absolute
+	top 50%
+	left 10px
+	transform translateY(-50%)
+	width 45px
+	height 45px
+	background-color $Danger
 .dialogBox
 	width 80%
 	position relative
@@ -133,13 +165,14 @@ export default{
 .dialogEdit
 	width 100%
 .dialogName
-	height 10%
-	font-size 20px
+	height 6%
+	font-size 18px
 	text-align left
 	text-indent 10px
-	line-height 3
+	line-height 2
+	background $DarkWhite
 .dialogContent
-	height 60%
+	height 70%
 	overflow auto
 	background-color $ExtraLightGray
 	padding 20px
@@ -167,7 +200,7 @@ textarea.dialogEdit
 	font-size 16px
 	border none
 	resize none
-	height 30%
+	height 24%
 	overflow auto
 	background $DarkWhite
 	float left

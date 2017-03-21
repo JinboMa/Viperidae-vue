@@ -166,11 +166,20 @@ export default function(){
 		chat : {
 			method : "WS",
 			url : "chat",
-			successMsg : "关闭成功",
-			failMsg : "关闭失败",
+			successMsg : "开启成功",
+			failMsg : "开启失败",
 			successAlert : false,
 			failAlert : false,
 			token : true,
 		},
+		friends : {
+			method : "GET",
+			url : "chat/friends",
+			successMsg : "获取好友列表成功",
+			failMsg : "获取好友列表失败",
+			successAlert : false,
+			failAlert : false,
+			token : true,
+		}
 	}
 }
