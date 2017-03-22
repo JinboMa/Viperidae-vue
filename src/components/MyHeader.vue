@@ -1,6 +1,6 @@
 <template lang="jade">
 	.myHeader
-		el-menu.el-menu-demo(theme="dark",:default-active="headerIndex",mode="horizontal",@select="select",router)
+		el-menu(theme="light",:default-active="headerIndex",mode="horizontal",@select="select",router)
 			el-menu-item(index="/")
 					i.el-icon-menu
 			el-submenu(index="2")
@@ -16,12 +16,10 @@
 			el-menu-item(index="0",style="float:right") {{time}}
 			el-submenu(index="6",style="float:right",@click="console.log(123)")
 				template(slot="title") {{userName}}
-				el-menu-item(index="userSetting",v-if="isLogin") 设置
+				el-menu-item(index="/UserSetting",v-if="isLogin") 设置
 				el-menu-item(index="logout",v-if="isLogin") 退出
 				el-menu-item(index="/Login",v-if="!isLogin") 登录
 				el-menu-item(index="/Registration",v-if="!isLogin") 注册
-						
-
 </template>
 
 <script>
@@ -103,9 +101,12 @@ export default {
 	position fixed
 	z-index 100
 	min-width 650px
+	box-shadow 5px 10px 100px $Gray
 .el-icon-menu
 	font-size 26px
 	color $LightGray
 	text-align center
 	transform translateY(5px)
+.el-menu
+	background-color $White
 </style>

@@ -1,9 +1,10 @@
 <template lang="jade">
 .blogList.content(v-loading="loading",element-loading-text="正在请求,请稍等")
-	el-col(:span="12",v-for="(blog,item) in formData")
+	el-col(:span="24")
+		el-button.addBlog(type="info",@click="toAddBlog",plain) 新建
+		el-button.editAllBlog(type="info",@click="isEdit=true",plain) 编辑
+	el-col(:offset="1",:span="10",v-for="(blog,item) in formData")
 		blog-content(:blogMsg="blog",:blogId="item",@resetBlogList="getMessage")
-	el-button.addBlog(type="info",@click="toAddBlog") 新建
-	el-button.editAllBlog(type="info",@click="isEdit=true") 编辑
 	el-dialog(title="编辑我的文章",v-model="isEdit")
 		edit-blogs(:blogs="formData",:isEdit="isEdit",@changeDels="changeDels($event)")
 		.dialog-footer(slot="footer")
@@ -81,12 +82,17 @@ export default {
 .blogList
 	position relative
 	padding-top 20px
+	margin-top 40px
 .addBlog
 .editAllBlog
 	position absolute
 	right -90px
 .addBlog
-	top 20px
+	position absolute
+	top 40px
+	right 10px
 .editAllBlog
-	top 60px
+	position absolute
+	top 80px
+	right 10px
 </style>

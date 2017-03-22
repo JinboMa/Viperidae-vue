@@ -28,6 +28,7 @@ export default {
 	watch:{
 		'isClick': function(isClick){
 			isClick && (this.loading = true) && this.ajax(this.setAjax("workDetails",{id : this.workId},this.getSuccess,this.getFail))
+			isClick || (this.isHover = false)
 		}
 	},
 	methods : {
@@ -80,7 +81,7 @@ export default {
 @import '../assets/styl/const.styl'
 .workContent
 	display block
-	width 50%
+	width 80%
 	margin 0 auto
 	// border-bottom 1px solid #f0f0f0
 	padding 10px

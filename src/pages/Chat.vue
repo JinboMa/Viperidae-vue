@@ -134,6 +134,8 @@ export default{
 	z-index 10
 	width 20%
 	background-color $LightGray
+	padding 20px 0
+	overflow auto
 .contactList
 	position relative
 	width 100%

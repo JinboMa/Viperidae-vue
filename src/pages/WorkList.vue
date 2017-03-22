@@ -1,11 +1,11 @@
 <template lang="jade">
 .workList.content(v-loading="loading",element-loading-text="正在请求,请稍等")
-	el-select(v-model="workType" placeholder="请选择工作类型")
+	el-select.selcetWork(v-model="workType" placeholder="请选择工作类型")
 		el-option(v-for="item in allWorkType",:label="item.label",:value="item.value")
+	el-button.addWork(type="info",@click="toAddWork",plain) 新建
+	el-button.editAllWork(type="info",@click="isEdit=true",plain) 编辑
 	el-col(:span="24",v-for="(work,item) in formData")
 		work-content(:workMsg="work",:workId="item",@resetWorkList="getMessage")
-	el-button.addWork(type="info",@click="toAddWork") 新建
-	el-button.editAllWork(type="info",@click="isEdit=true") 编辑
 	el-dialog(title="编辑我的工作",v-model="isEdit")
 		edit-works(:works="formData",:isEdit="isEdit",@changeDels="changeDels($event)")
 		.dialog-footer(slot="footer")
@@ -101,13 +101,16 @@ export default {
 <style scoped lang="stylus">
 .workList
 	position relative
-	padding-top 20px
+	padding 20px
+	margin-top 40px
+.selcetWork
+	width 140px
+	display inline-block
+	margin 0 60px 20px
 .addWork
+	float right
+	margin-right 60px
 .editAllWork
-	position absolute
-	right -90px
-.addWork
-	top 20px
-.editAllWork
-	top 60px
+	float right
+	margin-right 10px
 </style>

@@ -5,6 +5,7 @@ Vue.use(Router)
 //路由页面引入
 import Index from '../pages/Index'
 import Login from '../pages/Login'
+import UserSetting from '../pages/UserSetting'
 import Registration from '../pages/Registration'
 import Blog from '../pages/Blog'
 import Work from '../pages/Work'
@@ -17,10 +18,16 @@ export default new Router({
 			path: "/",
 			component: Index,
 			name: "Home"
-		},{
+		},
+		{
 			path: "/Login",
 			component: Login,
 			name: "Login"
+		},
+		{
+			path: "/UserSetting",
+			component: UserSetting,
+			name: "UserSetting"
 		},
 		{
 			path: "/Registration",
